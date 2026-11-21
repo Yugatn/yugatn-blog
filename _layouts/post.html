@@ -1,0 +1,14 @@
+---
+layout: default
+---
+{% assign l = site.data.copy[page.lang] | default: site.data.copy.ru %}
+<article class="post">
+  <div class="post-utility"><a href="{% if page.lang == 'en' %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}">← {{ l.back }}</a></div>
+  <header class="post-header">
+    <p class="post-date">{{ l.date }} · <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%d.%m.%Y' }}</time></p>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="post-deck">{{ page.description | escape }}</p>{% endif %}
+  </header>
+  <div class="post-content">{{ content }}</div>
+  <div class="post-end" aria-hidden="true">✦</div>
+</article>
