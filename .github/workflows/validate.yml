@@ -15,3 +15,10 @@ jobs:
           python-version: '3.11'
       - name: Verify publication approval markers
         run: python3 scripts/check_publication.py
+      - name: Set up Ruby for Jekyll
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+      - name: Build the GitHub Pages site
+        run: bundle exec jekyll build --trace
