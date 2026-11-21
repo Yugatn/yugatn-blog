@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{ page.lang | default: 'ru' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% assign l = site.data.copy[page.lang] | default: site.data.copy.ru %}
+    {% assign page_title = page.seo_title | default: page.title | default: site.title %}
+    <title>{{ page_title | escape }} — ЮГАТН</title>
+    <meta name="description" content="{{ page.description | default: l.intro | escape }}">
+    <meta name="author" content="Югатн / Yugatn">
+    <meta name="color-scheme" content="light dark">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    {% if page.is_home %}
+    <link rel="alternate" hreflang="ru" href="{{ '/' | absolute_url }}">
+    <link rel="alternate" hreflang="en" href="{{ '/en/' | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ '/' | absolute_url }}">
+    {% endif %}
+    <link rel="alternate" type="application/atom+xml" title="Yugatn Journal" href="{{ '/feed.xml' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{{ l.skip }}</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="Yugatn Blog">ЮГАТН<span class="brand-stop">.</span></a>
+        <div class="header-meta"><span>{{ l.journal }}</span></div>
+        <div class="language-switch" aria-label="{{ l.lang_title }}">
+          <a href="{{ '/' | relative_url }}" lang="ru" {% if page.lang == 'ru' %}aria-current="page"{% endif %}>RU</a>
+          <span aria-hidden="true">/</span>
+          <a href="{{ '/en/' | relative_url }}" lang="en" {% if page.lang == 'en' %}aria-current="page"{% endif %}>EN</a>
+        </div>
+      </header>
+      <main id="content">{{ content }}</main>
+      <footer class="site-footer">
+        <span>© {{ 'now' | date: '%Y' }} ЮГАТН / YUGATN</span>
+        <span>{{ l.footer }}</span>
+      </footer>
+    </div>
+  </body>
+</html>

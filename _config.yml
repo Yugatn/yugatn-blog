@@ -1,0 +1,24 @@
+title: "ЮГАТН — авторский журнал"
+description: "Авторский блог на русском и английском языках: эссе, философия, исследования, культура и технологии."
+url: "https://yugatn.github.io"
+baseurl: "/yugatn-blog"
+timezone: "Europe/Berlin"
+encoding: "utf-8"
+markdown: kramdown
+highlighter: rouge
+show_drafts: false
+future: false
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+feed:
+  path: feed.xml
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - scripts
+  - .github
+  - .gitignore
+  - _drafts
+  - vendor

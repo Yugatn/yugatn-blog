@@ -1,0 +1,36 @@
+---
+layout: default
+---
+{% assign l = site.data.copy[page.lang] | default: site.data.copy.ru %}
+{% assign approved_posts = site.posts | where: "lang", page.lang | where: "approved", true %}
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-kicker"><span class="small-diamond" aria-hidden="true"></span> {{ l.label }}</div>
+  <h1 id="hero-heading">{{ l.heading }}</h1>
+  <p class="hero-intro">{{ l.intro }}</p>
+  <div class="hero-rule" aria-hidden="true"></div>
+  <div class="hero-label"><span class="status-dot"></span>{{ l.status }}</div>
+</section>
+<section class="publications" id="publications" aria-labelledby="posts-heading">
+  <div class="section-title-row">
+    <h2 id="posts-heading">{{ l.posts }}</h2>
+    <span class="section-index">01 — {{ approved_posts.size | prepend: '0' | slice: -2, 2 }}</span>
+  </div>
+  {% if approved_posts.size == 0 %}
+    <div class="empty-state">
+      <span class="empty-mark" aria-hidden="true">✦</span>
+      <h3>{{ l.empty_title }}</h3>
+      <p>{{ l.empty_text }}</p>
+    </div>
+  {% else %}
+    <ol class="article-grid">
+    {% for post in approved_posts %}
+      <li class="article-card">
+        <div class="article-card-date"><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d.%m.%Y' }}</time></div>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+        {% if post.description %}<p>{{ post.description | escape }}</p>{% endif %}
+        <a class="article-read" href="{{ post.url | relative_url }}">{{ l.read }} <span aria-hidden="true">↗</span></a>
+      </li>
+    {% endfor %}
+    </ol>
+  {% endif %}
+</section>
